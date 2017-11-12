@@ -1,0 +1,17 @@
+<h1>新增任務</h1>
+
+  <%= form_for(@newtask) do |f| %>
+    <%= f.label :name, "任務" %>
+    <%= f.text_field :name %> <br />
+
+    <%= f.label :deadline, "DUE" %>
+    <%= f.date_select :deadline %> <br />
+
+    <%= f.label :note, "備註" %>
+    <%= f.text_field :note %> <br />
+
+    <%= f.submit %>
+  <% end %>
+
+  <br />
+  <%= link_to '回前一頁', tasks_path %>

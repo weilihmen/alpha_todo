@@ -1,0 +1,83 @@
+
+
+<header class="masthead" style="background-image: url('desk.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <h1 class="text-left">My To Do List </h1>
+              <p class="subheading text-left">Today : <%= Date.today %></p>
+              <div class="text-left mgt20 clear-fix">
+               <%= link_to '<div class="btn btn-primary">New ToDo</div>'.html_safe, new_task_path %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</header>
+
+<div class="container">
+<h2>待完成工作</h2>
+<table class="table table-striped table-condensed">
+    <thead>
+      <tr>
+        <td class="tdtitle">名稱</td>
+        <td class="tddate">DUE</td>
+        <td class="tdnote">Note</td>
+        <td class="tdaction">動作</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @undonetasks.each do |f| %>
+        <td><%= f.name %></td>
+        <td><%= f.deadline %></td>
+        <td><%= f.note %></td>
+        <td><%= link_to '<span class="glyphicon glyphicon-check"></span>完成'.html_safe, {:action => :done, :id => f.id}, :method => :put %>
+          <%= link_to '<span class="glyphicon glyphicon-pencil"></span>編輯'.html_safe, edit_task_path(f) %>
+          <%= link_to '<span class="glyphicon glyphicon-trash"></span>刪除'.html_safe, task_path(f), method: "delete" %></td>
+      </tbody>
+      <% end %>
+</table>
+
+
+<h2>已完成工作</h2>
+<table class="table table-striped table-condensed">
+    <thead>
+      <tr>
+        <td class="tdtitle">名稱</td>
+        <td class="tddate">DUE</td>
+        <td class="tdnote">Note</td>
+        <td class="tdaction">動作</td>
+      </tr>
+    </thead>
+    <tbody class="">
+      <% @donetasks.each do |f| %>
+        <td><%= f.name %></td>
+        <td><%= f.deadline %></td>
+        <td><%= f.note %></td>
+        <td><%= link_to '<span class="glyphicon glyphicon-trash"></span>刪除'.html_safe, task_path(f), method: "delete" %></td>
+    </tbody>
+      <% end %>
+</table>
+
+<h2>逾期未完成</h2>
+<table class="table table-striped table-condensed">
+    <thead>
+      <tr>
+        <td class="tdtitle">名稱</td>
+        <td class="tddate">DUE</td>
+        <td class="tdnote">Note</td>
+        <td class="tdaction"></td>
+      </tr>
+    </thead>
+    <tbody class="">
+      <% @failtasks.each do |f| %>
+        <td><%= f.name %></td>
+        <td><%= f.deadline %></td>
+        <td><%= f.note %></td>
+    </tbody>
+      <% end %>
+</table>
+
+</div>
